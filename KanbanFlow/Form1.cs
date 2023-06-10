@@ -9,6 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+
 using MySql.Data.MySqlClient;
 using System.Windows.Input;
 using KanbanFlow.Helpers;
@@ -18,11 +19,13 @@ namespace KanbanFlow
 {
     public partial class formAuthentication : Form
     {
+
         
         dbs connectionString = new dbs();
         MySqlConnection connectionBD = null;
         MySqlCommand cmdSelectUsuario = null;
         MySqlCommand cmdInsertUsuario = null;
+
 
         public formAuthentication()
         {
@@ -30,6 +33,7 @@ namespace KanbanFlow
         }
         private string IsValidEmail(string email)
         {
+
             // Define a expressão regular para email.
             string emailPattern = @"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
             Regex regex = new Regex(emailPattern);
@@ -38,11 +42,13 @@ namespace KanbanFlow
             if (!regex.IsMatch(email))
             {
                 return "Email inválido ou faltando!.";
+
             }
 
             // Return null if the email address is valid.
             return null;
         }
+
         private string IsValidPassword(string password)
         {
             string passwordPattern = "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$";
@@ -54,6 +60,7 @@ namespace KanbanFlow
 
             return null;
         }
+
 
         private void formAuthentication_Load(object sender, EventArgs e)
         {
@@ -84,6 +91,7 @@ namespace KanbanFlow
         private void btnSignIn_Click(object sender, EventArgs e)
         {
             string errorMessage = IsValidEmail(textBoxEmail.Text);
+
             string errorPassword = IsValidPassword(textBoxPassword.Text);
 
             if (errorMessage != null && errorPassword != null) {
@@ -147,10 +155,12 @@ namespace KanbanFlow
                     connectionBD.Close();
                 }
             }
+
         }
 
         private void btnRegister_Click(object sender, EventArgs e)
         {
+
             string errorEmail = IsValidEmail(textBoxEmailSignUp.Text);
             string errorPassword = IsValidPassword(textBoxPasswordSignUp.Text);
 
